@@ -2,7 +2,7 @@ package common
 
 import (
 	"fmt"
-	"github.com/mitchellh/goamz/aws"
+	"github.com/jefflab/goamz/aws"
 	"github.com/mitchellh/packer/packer"
 	"strings"
 	"unicode"

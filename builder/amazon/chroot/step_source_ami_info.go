@@ -2,7 +2,7 @@ package chroot
 
 import (
 	"fmt"
-	"github.com/mitchellh/goamz/ec2"
+	"github.com/jefflab/goamz/ec2"
 	"github.com/mitchellh/multistep"
 	"github.com/mitchellh/packer/packer"
 )
