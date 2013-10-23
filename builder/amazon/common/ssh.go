@@ -12,7 +12,7 @@ import (
 
 // SSHAddress returns a function that can be given to the SSH communicator
 // for determining the SSH address based on the instance DNS name.
-func SSHAddress(e *ec2.EC2, port int) func(multistep.StateBag) (string, error) {
+func SSHAddress(e ec2.EC2, port int) func(multistep.StateBag) (string, error) {
 	return func(state multistep.StateBag) (string, error) {
 		for j := 0; j < 2; j++ {
 			var host string

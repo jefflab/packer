@@ -13,7 +13,7 @@ import (
 type StepInstanceInfo struct{}
 
 func (s *StepInstanceInfo) Run(state multistep.StateBag) multistep.StepAction {
-	ec2conn := state.Get("ec2").(*ec2.EC2)
+	ec2conn := state.Get("ec2").(ec2.EC2)
 	ui := state.Get("ui").(packer.Ui)
 
 	// Get our own instance ID

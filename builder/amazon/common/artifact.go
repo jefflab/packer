@@ -18,7 +18,7 @@ type Artifact struct {
 	BuilderIdValue string
 
 	// EC2 connection for performing API stuff.
-	Conn *ec2.EC2
+	Conn ec2.EC2
 }
 
 func (a *Artifact) BuilderId() string {

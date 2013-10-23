@@ -12,7 +12,7 @@ type stepCreateAMI struct{}
 
 func (s *stepCreateAMI) Run(state multistep.StateBag) multistep.StepAction {
 	config := state.Get("config").(config)
-	ec2conn := state.Get("ec2").(*ec2.EC2)
+	ec2conn := state.Get("ec2").(ec2.EC2)
 	instance := state.Get("instance").(*ec2.Instance)
 	ui := state.Get("ui").(packer.Ui)
 

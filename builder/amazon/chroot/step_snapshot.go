@@ -18,7 +18,7 @@ type StepSnapshot struct {
 }
 
 func (s *StepSnapshot) Run(state multistep.StateBag) multistep.StepAction {
-	ec2conn := state.Get("ec2").(*ec2.EC2)
+	ec2conn := state.Get("ec2").(ec2.EC2)
 	ui := state.Get("ui").(packer.Ui)
 	volumeId := state.Get("volume_id").(string)
 
@@ -77,7 +77,7 @@ func (s *StepSnapshot) Cleanup(state multistep.StateBag) {
 	_, halted := state.GetOk(multistep.StateHalted)
 
 	if cancelled || halted {
-		ec2conn := state.Get("ec2").(*ec2.EC2)
+		ec2conn := state.Get("ec2").(ec2.EC2)
 		ui := state.Get("ui").(packer.Ui)
 		ui.Say("Removing snapshot since we cancelled or halted...")
 		_, err := ec2conn.DeleteSnapshots([]string{s.snapshotId})

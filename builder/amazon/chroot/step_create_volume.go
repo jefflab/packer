@@ -19,7 +19,7 @@ type StepCreateVolume struct {
 }
 
 func (s *StepCreateVolume) Run(state multistep.StateBag) multistep.StepAction {
-	ec2conn := state.Get("ec2").(*ec2.EC2)
+	ec2conn := state.Get("ec2").(ec2.EC2)
 	image := state.Get("source_image").(*ec2.Image)
 	instance := state.Get("instance").(*ec2.Instance)
 	ui := state.Get("ui").(packer.Ui)
@@ -97,7 +97,7 @@ func (s *StepCreateVolume) Cleanup(state multistep.StateBag) {
 		return
 	}
 
-	ec2conn := state.Get("ec2").(*ec2.EC2)
+	ec2conn := state.Get("ec2").(ec2.EC2)
 	ui := state.Get("ui").(packer.Ui)
 
 	ui.Say("Deleting the created EBS volume...")

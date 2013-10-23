@@ -16,7 +16,7 @@ type StepSourceAMIInfo struct{}
 
 func (s *StepSourceAMIInfo) Run(state multistep.StateBag) multistep.StepAction {
 	config := state.Get("config").(*Config)
-	ec2conn := state.Get("ec2").(*ec2.EC2)
+	ec2conn := state.Get("ec2").(ec2.EC2)
 	ui := state.Get("ui").(packer.Ui)
 
 	ui.Say("Inspecting the source AMI...")

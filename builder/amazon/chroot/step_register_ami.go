@@ -13,7 +13,7 @@ type StepRegisterAMI struct{}
 
 func (s *StepRegisterAMI) Run(state multistep.StateBag) multistep.StepAction {
 	config := state.Get("config").(*Config)
-	ec2conn := state.Get("ec2").(*ec2.EC2)
+	ec2conn := state.Get("ec2").(ec2.EC2)
 	image := state.Get("source_image").(*ec2.Image)
 	snapshotId := state.Get("snapshot_id").(string)
 	ui := state.Get("ui").(packer.Ui)

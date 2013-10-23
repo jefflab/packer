@@ -19,7 +19,7 @@ type StepSecurityGroup struct {
 }
 
 func (s *StepSecurityGroup) Run(state multistep.StateBag) multistep.StepAction {
-	ec2conn := state.Get("ec2").(*ec2.EC2)
+	ec2conn := state.Get("ec2").(ec2.EC2)
 	ui := state.Get("ui").(packer.Ui)
 
 	if s.SecurityGroupId != "" {
@@ -79,7 +79,7 @@ func (s *StepSecurityGroup) Cleanup(state multistep.StateBag) {
 		return
 	}
 
-	ec2conn := state.Get("ec2").(*ec2.EC2)
+	ec2conn := state.Get("ec2").(ec2.EC2)
 	ui := state.Get("ui").(packer.Ui)
 
 	ui.Say("Deleting temporary security group...")

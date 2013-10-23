@@ -23,7 +23,7 @@ type StateRefreshFunc func() (result interface{}, state string, err error)
 
 // StateChangeConf is the configuration struct used for `WaitForState`.
 type StateChangeConf struct {
-	Conn      *ec2.EC2
+	Conn      ec2.EC2
 	Pending   []string
 	Refresh   StateRefreshFunc
 	StepState multistep.StateBag
@@ -32,7 +32,7 @@ type StateChangeConf struct {
 
 // AMIStateRefreshFunc returns a StateRefreshFunc that is used to watch
 // an AMI for state changes.
-func AMIStateRefreshFunc(conn *ec2.EC2, imageId string) StateRefreshFunc {
+func AMIStateRefreshFunc(conn ec2.EC2, imageId string) StateRefreshFunc {
 	return func() (interface{}, string, error) {
 		resp, err := conn.Images([]string{imageId}, ec2.NewFilter())
 		if err != nil {
@@ -58,7 +58,7 @@ func AMIStateRefreshFunc(conn *ec2.EC2, imageId string) StateRefreshFunc {
 
 // InstanceStateRefreshFunc returns a StateRefreshFunc that is used to watch
 // an EC2 instance.
-func InstanceStateRefreshFunc(conn *ec2.EC2, i *ec2.Instance) StateRefreshFunc {
+func InstanceStateRefreshFunc(conn ec2.EC2, i *ec2.Instance) StateRefreshFunc {
 	return func() (interface{}, string, error) {
 		resp, err := conn.Instances([]string{i.InstanceId}, ec2.NewFilter())
 		if err != nil {

@@ -22,7 +22,7 @@ type StepAttachVolume struct {
 }
 
 func (s *StepAttachVolume) Run(state multistep.StateBag) multistep.StepAction {
-	ec2conn := state.Get("ec2").(*ec2.EC2)
+	ec2conn := state.Get("ec2").(ec2.EC2)
 	device := state.Get("device").(string)
 	instance := state.Get("instance").(*ec2.Instance)
 	ui := state.Get("ui").(packer.Ui)
@@ -89,7 +89,7 @@ func (s *StepAttachVolume) CleanupFunc(state multistep.StateBag) error {
 		return nil
 	}
 
-	ec2conn := state.Get("ec2").(*ec2.EC2)
+	ec2conn := state.Get("ec2").(ec2.EC2)
 	ui := state.Get("ui").(packer.Ui)
 
 	ui.Say("Detaching EBS volume...")

@@ -18,7 +18,7 @@ type StepKeyPair struct {
 }
 
 func (s *StepKeyPair) Run(state multistep.StateBag) multistep.StepAction {
-	ec2conn := state.Get("ec2").(*ec2.EC2)
+	ec2conn := state.Get("ec2").(ec2.EC2)
 	ui := state.Get("ui").(packer.Ui)
 
 	ui.Say(fmt.Sprintf("Creating temporary keypair: %s", s.KeyPairName))
@@ -70,7 +70,7 @@ func (s *StepKeyPair) Cleanup(state multistep.StateBag) {
 		return
 	}
 
-	ec2conn := state.Get("ec2").(*ec2.EC2)
+	ec2conn := state.Get("ec2").(ec2.EC2)
 	ui := state.Get("ui").(packer.Ui)
 
 	ui.Say("Deleting temporary keypair...")

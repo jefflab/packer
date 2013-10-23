@@ -24,7 +24,7 @@ type StepRunSourceInstance struct {
 }
 
 func (s *StepRunSourceInstance) Run(state multistep.StateBag) multistep.StepAction {
-	ec2conn := state.Get("ec2").(*ec2.EC2)
+	ec2conn := state.Get("ec2").(ec2.EC2)
 	keyName := state.Get("keyPair").(string)
 	securityGroupId := state.Get("securityGroupId").(string)
 	ui := state.Get("ui").(packer.Ui)
@@ -122,7 +122,7 @@ func (s *StepRunSourceInstance) Cleanup(state multistep.StateBag) {
 		return
 	}
 
-	ec2conn := state.Get("ec2").(*ec2.EC2)
+	ec2conn := state.Get("ec2").(ec2.EC2)
 	ui := state.Get("ui").(packer.Ui)
 
 	ui.Say("Terminating the source AWS instance...")
